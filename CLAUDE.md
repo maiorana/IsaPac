@@ -8,6 +8,24 @@ IsaPac — clone de Pac-Man de tema pessoal (a "Isadora" foge dos "Ronaldos") em
 
 Arquivos: `index.html`, `style.css`, `game.js` (toda a lógica), e três imagens (`Isadora.jpg`, `Ronaldo.jpg` viram sprites circulares; `PlantaMapa.PNG` é só a referência visual da planta do apartamento que inspirou o mapa).
 
+Repo: **https://github.com/maiorana/IsaPac** (privado). Origin via SSH (`git@github.com:maiorana/IsaPac.git`).
+
+## Auto-push (importante)
+
+Este projeto está configurado para **commitar e dar push automaticamente ao final de cada resposta do Claude**, via Stop hook em `.claude/settings.local.json`. O hook roda:
+
+```sh
+git add -A && (git diff --cached --quiet || (git commit -q -m "auto: sessão <data>" && git push))
+```
+
+Implicações ao trabalhar nele:
+
+- **Cada resposta com mudança de arquivo vira um commit no GitHub.** Não há janela de revisão entre editar e publicar — se você escreveu algo, em segundos está visível no remote.
+- **Não rascunhe segredos.** `.env`, tokens, chaves: nada disso pode encostar no working tree, mesmo "temporariamente". O `.gitignore` cobre `.DS_Store` e `.claude/settings.local.json`, mas não tem allowlist genérica.
+- **Mensagens são genéricas** (timestamp). Se quiser uma mensagem boa de verdade pra uma mudança específica, faça o commit manualmente *antes* de terminar a resposta — o hook só commita o que ainda está unstaged/uncommitted, então um commit manual prévio passa intacto.
+- **O hook usa caminho absoluto** (`/Users/ronaldomaioranajunior/Downloads/IsaPac`). Se o projeto for movido ou clonado em outra máquina, o hook precisa ser reapontado em `.claude/settings.local.json`.
+- `settings.local.json` está no `.gitignore` (é per-máquina). Pra recriar em outro lugar: gerar chave SSH, adicionar no GitHub, e recriar o JSON do hook.
+
 ## Como rodar
 
 Precisa de servidor HTTP local — abrir `index.html` direto via `file://` faz o `loadImage` falhar com CORS (`crossOrigin = 'anonymous'` em `game.js`) e o jogo cai no fallback de retângulos coloridos.
