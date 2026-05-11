@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IsaPac - Pacman do Apartamento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="hud">
+            <div class="score-block">
+                <div class="label">PONTOS</div>
+                <div id="score" class="value">0</div>
+            </div>
+            <h1 class="title">IsaPac</h1>
+            <div class="lives-block">
+                <div class="label">VIDAS</div>
+                <div id="lives" class="value">3</div>
+            </div>
+            <div class="fps-block">
+                <div class="label">FPS</div>
+                <div id="fps" class="value">--</div>
+            </div>
+        </header>
+
+        <div class="canvas-wrapper">
+            <canvas id="game" width="456" height="504"></canvas>
+
+            <div id="overlay" class="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">IsaPac</h2>
+                    <p id="overlayMsg">Use as setas ou WASD para mover<br>Coma todos os pontos e fuja dos Ronaldos!</p>
+                    <button id="startBtn">JOGAR</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="controls">
+            <p>Setas / WASD para mover &middot; ESC para pausar</p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
